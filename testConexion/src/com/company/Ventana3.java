@@ -3,16 +3,20 @@ package com.company;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Objects;
 //reeeeee
 
 public class Ventana3 {
 
-    public void mostrarTabla(DefaultTableModel modelo, String query) {
+    public static void mostrarTabla(DefaultTableModel modelo, String query) {
         modelo.setRowCount(0);
-        Conexion2 conn = new Conexion2();
+        //Conexion2 conn = new Conexion2();
 
-        Connection c = conn.miconexion();
+        Connection c = Conexion2.miconexion();
         if (c != null) {
             try {
                 Statement st = c.createStatement();
@@ -35,7 +39,7 @@ public class Ventana3 {
 
     public static void main(String[] args) {
 
-        Ventana3 v3 = new Ventana3();
+        //Ventana3 v3 = new Ventana3();
         JFrame v = new JFrame("Ventana 3");
 
         DefaultTableModel modelo = new DefaultTableModel();
@@ -59,7 +63,7 @@ public class Ventana3 {
 
         ActionListener listener = e -> {
             if (!(caja.getSelectedIndex() == 0))
-                v3.mostrarTabla(modelo, caja.getSelectedItem().toString());
+                mostrarTabla(modelo, Objects.requireNonNull(caja.getSelectedItem()).toString());
         };
 
         boton1.addActionListener(listener);
