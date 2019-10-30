@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.sql.*;
+//reeeeee
 
 public class Ventana3 {
 
@@ -15,15 +16,14 @@ public class Ventana3 {
         if (c != null) {
             try {
                 Statement st = c.createStatement();
-                ResultSet rs = st.executeQuery(query);
-
+                ResultSet rs = st.executeQuery("select" + query);
+                int index = rs.getMetaData().getColumnCount();
                 while(rs.next()) {
-                    Object[] tablaSQL = new Object[5];
+                    Object[] tablaSQL = new Object[index];
 
-                    for(int i=0; i<5; i++) {
+                    for(int i=0; i< index; i++) {
                         tablaSQL[i] = rs.getObject(i+1);
                     }
-
                     modelo.addRow(tablaSQL);
                 }
                 c.close();
@@ -32,7 +32,6 @@ public class Ventana3 {
             }
         }
     }
-
 
     public static void main(String[] args) {
 
@@ -53,31 +52,25 @@ public class Ventana3 {
         caja.addItem("Info");
         caja.addItem("Num cats");
 
-
-        boton1.setBounds(20,20,70,25);
-
-        tabla1.setBounds(20,55,250,180);
-        scroll1.setBounds(20,55,250,180);
-
+        caja.setBounds(20,20,100,30);
+        boton1.setBounds(140,20,100,30);
+        tabla1.setBounds(20,55,450,220);
+        scroll1.setBounds(20,55,450,220);
 
         ActionListener listener = e -> {
             if (!(caja.getSelectedIndex() == 0))
                 v3.mostrarTabla(modelo, caja.getSelectedItem().toString());
         };
 
-
-
-
-
         boton1.addActionListener(listener);
 
-
+        v.add(caja);
         v.add(boton1);
         v.add(scroll1);
 
         v.setLayout(null);
         v.setResizable(false);
-        v.setSize(300,300);
+        v.setSize(500,350);
         v.setLocationRelativeTo(null);
         v.setDefaultCloseOperation(v.EXIT_ON_CLOSE);
         v.setVisible(true);
