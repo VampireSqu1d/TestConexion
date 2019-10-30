@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Conexion2 {
 
-    public static void main(String[] args){}
+    //public static void main(String[] args){}
 
     public static Connection miconexion(){
         String URL = "148.225.60.114";
