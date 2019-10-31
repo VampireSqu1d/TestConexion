@@ -15,7 +15,7 @@ public class Conexion2 {
         String pass = "root";
 
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Nice driver bro");
         }
         catch(ClassNotFoundException ex){
